@@ -11,16 +11,27 @@ var particles;
 
 var mouseX = 0;
 var mouseY = 0;
-var initialized = false;
+var started = false;
+
+initialize();
 
 function initialize() {
-  if (initialized == true){
-    return;
-  }
   initialized = true;
   canvas = document.getElementById('screen');
+  canvas.width = SCREEN_WIDTH;
+  canvas.height = SCREEN_HEIGHT;
   context = canvas.getContext('2d');
+  context.font = "100px Arial";
+  context.fillStyle = "white";
+  context.textAlign = "center";
+  context.fillText("Click", canvas.width/2, canvas.height/2);
+}
 
+function start() {
+  if (started == true){
+    return;
+  }
+  started = true;
   document.addEventListener('mousemove', moveMouseHandler, false);
   window.addEventListener('resize', resizeHandler, false);
 
