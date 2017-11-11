@@ -1,6 +1,11 @@
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background-color: black;
+  position: relative
 }
 
 canvas {
