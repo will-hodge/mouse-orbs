@@ -34,7 +34,7 @@ function start() {
     return;
   }
   started = true;
-  
+
   document.addEventListener('mousemove', moveMouseHandler, false);
   window.addEventListener('resize', resizeHandler, false);
 
