@@ -21,6 +21,7 @@ function initialize() {
   canvas = document.getElementById('screen');
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
+
   context = canvas.getContext('2d');
   context.font = "100px Arial";
   context.fillStyle = "white";
@@ -33,6 +34,7 @@ function start() {
     return;
   }
   started = true;
+  
   document.addEventListener('mousemove', moveMouseHandler, false);
   window.addEventListener('resize', resizeHandler, false);
 
