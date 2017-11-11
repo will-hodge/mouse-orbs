@@ -13,7 +13,9 @@ var mouseX = 0;
 var mouseY = 0;
 var started = false;
 
-initialize();
+window.onload = function() {
+  initialize();
+}
 
 function initialize() {
   initialized = true;
@@ -60,7 +62,6 @@ function createParticles() {
       fillColor: '#' + (Math.random(Math.random() * 3) * 0xdddddd | 0).toString(16),
       orbit: RADIUS * .5 + (RADIUS * Math.random() * 3)
     };
-    console.log(particle.fillColor);
 
     particles.push(particle);
   }
@@ -74,8 +75,6 @@ function moveMouseHandler(event) {
 function resizeHandler() {
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
-
-  canvas.style.position = 'absolute';
 }
 
 function run() {
