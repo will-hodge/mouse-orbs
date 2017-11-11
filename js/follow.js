@@ -18,7 +18,6 @@ window.onload = function() {
 }
 
 function initialize() {
-  initialized = true;
   canvas = document.getElementById('screen');
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
