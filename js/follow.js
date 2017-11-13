@@ -12,6 +12,7 @@ var particles;
 var mouseX = 0;
 var mouseY = 0;
 var started = false;
+var mouseDown = false;
 
 window.onload = function() {
   initialize();
@@ -27,6 +28,9 @@ function initialize() {
   context.fillStyle = "white";
   context.textAlign = "center";
   context.fillText("Click", canvas.width/2, canvas.height/2);
+  document.addEventListener('click', start, {
+    once: true,
+  });
 }
 
 function start() {
@@ -36,12 +40,14 @@ function start() {
   started = true;
 
   document.addEventListener('mousemove', moveMouseHandler, false);
+  document.addEventListener('mousedown', updateParticles, false);
+  document.addEventListener('mouseup', updateParticles, false);
   window.addEventListener('resize', resizeHandler, false);
 
   moveMouseHandler(event);
   createParticles();
   resizeHandler();
-  setInterval(run, 1000 / 60);
+  setInterval(run, 15);
 }
 
 function createParticles() {
@@ -114,4 +120,17 @@ function run() {
     context.arc(particle.position.x, particle.position.y, particle.size/2, 0, Math.PI*2, true);
     context.fill();
   }
+}
+
+function updateParticles(e){
+  mouseDown = !(mouseDown);
+  for (i = 0; i < particles.length; i++) {
+    var particle = particles[i];
+      if (mouseDown){
+        particle.speed = particle.speed/4;
+      }
+      else {
+        particle.speed = particle.speed*4;
+      }
+    }
 }
