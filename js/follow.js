@@ -28,9 +28,6 @@ function initialize() {
   context.fillStyle = "white";
   context.textAlign = "center";
   context.fillText("Click", canvas.width/2, canvas.height/2);
-  document.addEventListener('click', start, {
-    once: true,
-  });
 }
 
 function start() {
