@@ -29,11 +29,11 @@ function initialize() {
   context.font = "100px Arial";
   context.fillStyle = "white";
   context.textAlign = "center";
-  context.fillText("Click", canvas.width/2, canvas.height/2);
+  context.fillText("Click", canvas.width / 2, canvas.height / 2);
 }
 
 function start() {
-  if (started == true){
+  if (started == true) {
     return;
   }
   started = true;
@@ -66,6 +66,7 @@ function createParticles() {
         y: mouseY
       },
       speed: Math.random() * 0.08 + 0.01,
+
       /* my attempt at ensuring the color of the particle is aesthetically pleasing */
       fillColor: '#' + (Math.random(Math.random() * 3) * 0xdddddd | 0).toString(16),
       orbit: RADIUS * .5 + (RADIUS * Math.random() * 3)
@@ -106,10 +107,10 @@ function run() {
     particle.shift.x += (mouseX - particle.shift.x) * particle.speed;
     particle.shift.y += (mouseY - particle.shift.y) * particle.speed;
 
-    particle.position.x = particle.shift.x + Math.cos( i + particle.angle )
-                          * particle.orbit;
-    particle.position.y = particle.shift.y + Math.sin( i + particle.angle )
-                          * particle.orbit;
+    particle.position.x = particle.shift.x + Math.cos(i + particle.angle) *
+                          particle.orbit;
+    particle.position.y = particle.shift.y + Math.sin(i + particle.angle) *
+                          particle.orbit;
 
     /* movement of the particle using the canvas moveTo/lineTo/stroke methods */
     context.beginPath();
@@ -119,21 +120,20 @@ function run() {
     context.moveTo(oldPosition.x, oldPosition.y);
     context.lineTo(particle.position.x, particle.position.y);
     context.stroke();
-    context.arc(particle.position.x, particle.position.y, particle.size/2, 0, Math.PI*2, true);
+    context.arc(particle.position.x, particle.position.y, particle.size / 2, 0, Math.PI * 2, true);
     context.fill();
   }
 }
 
 /* when clicked, update the speed of the particles */
-function updateParticles(e){
+function updateParticles(e) {
   mouseDown = !(mouseDown);
   for (i = 0; i < particles.length; i++) {
     var particle = particles[i];
-      if (mouseDown){
-        particle.speed = particle.speed/4;
-      }
-      else {
-        particle.speed = particle.speed*4;
-      }
+    if (mouseDown) {
+      particle.speed = particle.speed / 4;
+    } else {
+      particle.speed = particle.speed * 4;
     }
+  }
 }
