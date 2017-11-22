@@ -1,3 +1,4 @@
+/* initializers for when page loads */
 var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;
 
@@ -23,6 +24,7 @@ function initialize() {
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
 
+  /* creates Click prompt */
   context = canvas.getContext('2d');
   context.font = "100px Arial";
   context.fillStyle = "white";
@@ -51,6 +53,7 @@ function createParticles() {
   particles = [];
 
   for (var i = 0; i < QUANTITY; i++) {
+    /* particle object contains all necessary information for each rotation object */
     var particle = {
       position: {
         x: mouseX,
@@ -63,6 +66,7 @@ function createParticles() {
         y: mouseY
       },
       speed: Math.random() * 0.08 + 0.01,
+      /* my attempt at ensuring the color of the particle is aesthetically pleasing */
       fillColor: '#' + (Math.random(Math.random() * 3) * 0xdddddd | 0).toString(16),
       orbit: RADIUS * .5 + (RADIUS * Math.random() * 3)
     };
@@ -71,17 +75,20 @@ function createParticles() {
   }
 }
 
+/* adjusts the mouseX/Y coordinates when mouse moves */
 function moveMouseHandler(event) {
   mouseX = event.clientX;
   mouseY = event.clientY;
 }
 
+/* adjusts canvas dimensions upon screen resize */
 function resizeHandler() {
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
 }
 
 function run() {
+  /* how fast the color is overwritten by black background */
   context.fillStyle = 'rgba(0, 0, 0, 0.08)';
   context.fillRect(0, 0, context.canvas.width, context.canvas.height);
 
@@ -93,20 +100,18 @@ function run() {
       y: particle.position.y
     };
 
+    /* adjusts the angle, shift, and position of each particle */
     particle.angle += particle.speed;
 
     particle.shift.x += (mouseX - particle.shift.x) * particle.speed;
     particle.shift.y += (mouseY - particle.shift.y) * particle.speed;
 
-    particle.position.x = particle.shift.x + Math.cos( i + particle.angle)
+    particle.position.x = particle.shift.x + Math.cos( i + particle.angle )
                           * particle.orbit;
-    particle.position.y = particle.shift.y + Math.sin( i + particle.angle)
+    particle.position.y = particle.shift.y + Math.sin( i + particle.angle )
                           * particle.orbit;
 
-
-    if( Math.round( particle.size ) == Math.round( particle.targetSize ) ) {
-      particle.targetSize = 1 + Math.random() * 10;
-    }
+    /* movement of the particle using the canvas moveTo/lineTo/stroke methods */
     context.beginPath();
     context.fillStyle = particle.fillColor;
     context.strokeStyle = particle.fillColor;
@@ -119,6 +124,7 @@ function run() {
   }
 }
 
+/* when clicked, update the speed of the particles */
 function updateParticles(e){
   mouseDown = !(mouseDown);
   for (i = 0; i < particles.length; i++) {
