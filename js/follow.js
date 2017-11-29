@@ -14,6 +14,7 @@ var mouseX = 0;
 var mouseY = 0;
 var started = false;
 var mouseDown = false;
+var particles = [];
 
 window.onload = function() {
   initialize();
@@ -32,7 +33,7 @@ function initialize() {
   context.fillText("Click", canvas.width / 2, canvas.height / 2);
 }
 
-function start() {
+function start(e) {
   if (started == true) {
     return;
   }
@@ -43,14 +44,13 @@ function start() {
   document.addEventListener('mouseup', updateParticles, false);
   window.addEventListener('resize', resizeHandler, false);
 
-  moveMouseHandler(event);
+  moveMouseHandler(e);
   createParticles();
   resizeHandler();
   setInterval(run, 15);
 }
 
 function createParticles() {
-  particles = [];
 
   for (var i = 0; i < QUANTITY; i++) {
     /* particle object contains all necessary information for each rotation object */
@@ -77,13 +77,13 @@ function createParticles() {
 }
 
 /* adjusts the mouseX/Y coordinates when mouse moves */
-function moveMouseHandler(event) {
-  mouseX = event.clientX;
-  mouseY = event.clientY;
+function moveMouseHandler(e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
 }
 
 /* adjusts canvas dimensions upon screen resize */
-function resizeHandler() {
+function resizeHandler(event) {
   canvas.width = SCREEN_WIDTH;
   canvas.height = SCREEN_HEIGHT;
 }
